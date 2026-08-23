@@ -129,7 +129,10 @@ fn install_from_github(game_path: &PathBuf) {
     let asset = match github::find_zip_asset(&release.assets) {
         Some(a) => a,
         None => {
-            println!("Error: No .zip asset found in the release.");
+            println!(
+                "Error: no {} asset in the release.",
+                crate::core::paths::MOD_ZIP_NAME
+            );
             return;
         }
     };

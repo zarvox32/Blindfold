@@ -229,7 +229,10 @@ pub fn run() {
                 }
 
                 let Some(asset) = github::find_zip_asset(&info.assets) else {
-                    log_append(&log_c, "Error: No .zip asset found in the release.");
+                    log_append(&log_c, &format!(
+                        "Error: no {} asset in the release.",
+                        crate::core::paths::MOD_ZIP_NAME
+                    ));
                     return;
                 };
 
