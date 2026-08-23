@@ -106,18 +106,18 @@ try {
 }
 
 # --- Loadstone release manifest ----------------------------------------------------
-# release.json describes this release to Loadstone Mod Manager: version, the
+# loadstone-release.json describes this release to Loadstone Mod Manager: version, the
 # manager zip's sha256, and the frozen install steps. Must be built from the
 # same zip that gets uploaded — never regenerate it against a rebuilt zip.
-Write-Step "Building release.json (Loadstone)"
+Write-Step "Building loadstone-release.json (Loadstone)"
 if (Get-Command loadstone -ErrorAction SilentlyContinue) {
     & loadstone package --version $Version `
         --manifest (Join-Path $repo 'loadstone-packages\blindfold.json') `
         --artifact $managerZip `
-        --out (Join-Path $repo 'release.json')
+        --out (Join-Path $repo 'loadstone-release.json')
     if ($LASTEXITCODE -ne 0) { throw "loadstone package failed" }
 } else {
-    Write-Warning "loadstone CLI not found on PATH - skipping release.json (install: cargo install --path <loadstone repo>\crates\loadstone-cli)"
+    Write-Warning "loadstone CLI not found on PATH - skipping loadstone-release.json (install: cargo install --path <loadstone repo>\crates\loadstone-cli)"
 }
 
 # --- Installer ---------------------------------------------------------------------
@@ -139,6 +139,6 @@ if (-not $NoInstaller) {
 
 Write-Host ""
 Write-Host "Done. Publish with:"
-Write-Host "  gh release create $Version Blindfold.zip Blindfold-loadstone.zip release.json BlindfoldInstaller.exe --title $Version --notes `"...`""
+Write-Host "  gh release create $Version Blindfold.zip Blindfold-loadstone.zip loadstone-release.json BlindfoldInstaller.exe --title $Version --notes `"...`""
 Write-Host "NOTE: keep Blindfold.zip FIRST in that list. Old standalone installers"
 Write-Host "download the first .zip asset on the release; upload order preserves that."
