@@ -16,6 +16,13 @@ game at startup ("love quit unexpectedly") with an incompatible-architecture
 error. Shipping arm64 alone works only when the game is started from a
 native-arm64 parent, such as a terminal.
 
+`steam_lovely_macos.sh` is **not** part of the Lovely Injector — it is
+Blindfold's own Steam launch-options wrapper, kept here because it installs
+into the game folder alongside `liblovely.dylib`. Steam does not set
+`DYLD_INSERT_LIBRARIES`, and does not shell-parse its launch options, so a
+wrapper script is the only way to get Lovely loaded on a normal Steam launch.
+See "Launching on macOS" in the root README.
+
 It is bundled so `scripts/deploy.ps1` can install the mod with no downloads.
 The script copies this file next to `Balatro.exe`; the game's launcher then
 loads Lovely, which applies the patches in `src/lovely.toml`.

@@ -16,7 +16,8 @@ pub const USER_AGENT: &str = "BlindfoldInstaller";
 pub const LOVELY_FILES: &[&str] = &["version.dll"];
 
 #[cfg(target_os = "macos")]
-pub const LOVELY_FILES: &[&str] = &["liblovely.dylib", "run_lovely_macos.sh"];
+pub const LOVELY_FILES: &[&str] =
+    &["liblovely.dylib", "run_lovely_macos.sh", "steam_lovely_macos.sh"];
 
 #[cfg(all(not(target_os = "windows"), not(target_os = "macos")))]
 pub const LOVELY_FILES: &[&str] = &[];

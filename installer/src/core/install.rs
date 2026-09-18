@@ -260,6 +260,14 @@ fn extract_routed(
                 format!("Failed to write file {}: {}", name, e)
             }
         })?;
+
+        // Zip entries carry no unix mode here, so a shell script would land
+        // non-executable and Steam could not run it as a launch wrapper.
+        #[cfg(unix)]
+        if dest.extension().is_some_and(|e| e == "sh") {
+            use std::os::unix::fs::PermissionsExt;
+            let _ = fs::set_permissions(&dest, fs::Permissions::from_mode(0o755));
+        }
     }
 
     Ok(())
@@ -492,6 +500,37 @@ mod tests {
         {
             assert_eq!(fs::read(game.path().join("liblovely.dylib")).unwrap(), b"lovely dylib");
             assert_eq!(fs::read(game.path().join("run_lovely_macos.sh")).unwrap(), b"lovely sh");
+        }
+    }
+
+    /// Zip entries carry no unix mode, so the installer has to set it: Steam
+    /// cannot exec a launch wrapper that arrives without the bit.
+    #[cfg(unix)]
+    #[test]
+    fn install_makes_shell_scripts_executable() {
+        use std::os::unix::fs::PermissionsExt;
+        let game = tempfile::tempdir().unwrap();
+        let mods = tempfile::tempdir().unwrap();
+        let zip = make_zip(&[
+            ("liblovely.dylib", b"lovely dylib"),
+            ("run_lovely_macos.sh", b"lovely sh"),
+            ("steam_lovely_macos.sh", b"steam wrapper"),
+            ("Blindfold/lovely.toml", b"ok"),
+        ]);
+        install_zip_to(&zip, game.path(), mods.path()).unwrap();
+
+        for name in ["run_lovely_macos.sh", "steam_lovely_macos.sh"] {
+            let path = game.path().join(name);
+            if !path.exists() {
+                continue; // not a Lovely file on this target
+            }
+            let mode = fs::metadata(&path).unwrap().permissions().mode();
+            assert!(
+                mode & 0o111 != 0,
+                "{} should be executable, mode was {:o}",
+                name,
+                mode
+            );
         }
     }
 

@@ -40,9 +40,35 @@ menu.
    [latest release](https://github.com/bradjrenshaw/Blindfold/releases/latest).
 2. Run it. It finds your Steam install of Balatro automatically and shows one row of
    buttons: press **Install**.
-3. Launch Balatro through Steam. You should hear **"Blindfold loaded."**
+3. Tell Steam to launch the game through the Lovely Injector (see
+   **Launching on macOS** below) — without this the game starts unmodded.
+4. Launch Balatro through Steam. You should hear **"Blindfold loaded."**
 
 Prefer a console? Run `./BlindfoldInstaller.app/Contents/MacOS/blindfold-installer --cli` for the same flows as a menu.
+
+#### Launching on macOS
+
+Lovely injects itself with `DYLD_INSERT_LIBRARIES`, which Steam does not set
+on its own, so a stock Steam launch loads Balatro without any mods. The
+installer puts `steam_lovely_macos.sh` in the game folder to handle this:
+
+1. Steam → right-click **Balatro** → **Properties** → **General**.
+2. Set **Launch Options** to the full path of that script followed by
+   `%command%`, keeping the quotes (the path contains spaces) and writing the
+   path out literally rather than using `~` or `$HOME`:
+
+   ```
+   "/Users/YOURNAME/Library/Application Support/Steam/steamapps/common/Balatro/steam_lovely_macos.sh" %command%
+   ```
+3. Launch from Steam as usual.
+
+Do **not** put `DYLD_INSERT_LIBRARIES=... %command%` in Launch Options
+directly. Steam does not parse that string with a shell, so it tries to run a
+program by that literal name and fails with *"Failed to start process for
+this game : OS Error 260"*.
+
+To launch without Steam (no playtime tracking, no overlay), run
+`run_lovely_macos.sh` from the game folder instead.
 
 **Updating:** run the installer again. It tells you when a newer version is
 out and the Install/Update button adjusts. "Install dev build" instead
@@ -55,12 +81,14 @@ Prefer to place files yourself? Each release also ships `Blindfold.zip`
 
 1. **Copy Injector Files**:
    * **Windows**: Copy `version.dll` from the zip into Balatro's game folder, next to `Balatro.exe` (Steam: right-click Balatro → Manage → Browse local files).
-   * **macOS**: Copy `liblovely.dylib` and `run_lovely_macos.sh` from the zip into Balatro's game folder, next to `Balatro.app`.
+   * **macOS**: Copy `liblovely.dylib`, `run_lovely_macos.sh` and `steam_lovely_macos.sh` from the zip into Balatro's game folder, next to `Balatro.app`, and make the two `.sh` files executable (`chmod +x *.sh`).
    This is the [Lovely Injector](https://github.com/ethangreen-dev/lovely-injector) mod loader — skip it if you already run other Lovely mods.
 2. **Copy Mod Payload**:
    * **Windows**: Copy the zip's `Blindfold` folder (excluding `lib/libprism.dylib` which is Mac-only) into `%APPDATA%\Balatro\Mods`, so it ends up at `%APPDATA%\Balatro\Mods\Blindfold` (create `Mods` if it doesn't exist yet).
    * **macOS**: Copy the zip's `Blindfold` folder (excluding `lib/prism.dll` which is Windows-only) into `~/Library/Application Support/Balatro/Mods`, so it ends up at `~/Library/Application Support/Balatro/Mods/Blindfold` (create `Mods` if it doesn't exist yet).
-3. Launch Balatro through Steam.
+3. Launch Balatro through Steam. On macOS, set the Steam launch options
+   first — see **Launching on macOS** above; without them the game starts
+   unmodded.
 
 To update manually, delete the `Blindfold` folder under `Mods` and copy in the new zip's folder — settings live outside it and survive. To uninstall manually, delete the `Blindfold` folder under `Mods` and the injector files.
 
