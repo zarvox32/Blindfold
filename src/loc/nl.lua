@@ -106,6 +106,8 @@ return {
         SELECTED   = "geselecteerd",
         DESELECTED = "gedeselecteerd",
         TIP        = "{name}, {desc}",
+        RANDOM_MULT = "+{min} tot +{max} {mult}, willekeurig",
+        SEL_POS    = "selectie {index}",
     },
     EDITION = {
         foil = "folie", holographic = "holografisch",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "Druk op een toets of controllerknop voor {action}",
         BOUND           = "{action} toegewezen aan {key}",
         CANCELLED       = "Opnieuw toewijzen geannuleerd",
+        CONFLICT        = "{key} is al toegewezen aan {action}, opnieuw toewijzen geannuleerd",
+        CLICK_ORDER     = "Kaarten scoren in selectievolgorde",
+        CURSOR_FOLLOW   = "Spelcursor volgt de navigatie",
         ANN_TYPE        = "Type aankondigen",
         ANN_SUBTYPE     = "Zeldzaamheid aankondigen",
         ANN_SELECTED    = "Selectie aankondigen",

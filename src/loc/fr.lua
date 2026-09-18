@@ -106,6 +106,8 @@ return {
         SELECTED   = "sélectionnée",
         DESELECTED = "désélectionnée",
         TIP        = "{name}, {desc}",
+        RANDOM_MULT = "+{min} à +{max} {mult}, aléatoire",
+        SEL_POS    = "sélection {index}",
     },
     EDITION = {
         foil = "métallisée", holographic = "holographique",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "Appuyez sur une touche ou un bouton de manette pour {action}",
         BOUND           = "{action} assigné à {key}",
         CANCELLED       = "Réassignation annulée",
+        CONFLICT        = "{key} est déjà assigné à {action}, réassignation annulée",
+        CLICK_ORDER     = "Compter les cartes dans l'ordre de sélection",
+        CURSOR_FOLLOW   = "Le curseur du jeu suit la navigation",
         ANN_TYPE        = "Annoncer le type",
         ANN_SUBTYPE     = "Annoncer la rareté",
         ANN_SELECTED    = "Annoncer la sélection",

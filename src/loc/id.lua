@@ -106,6 +106,8 @@ return {
         SELECTED   = "dipilih",
         DESELECTED = "batal dipilih",
         TIP        = "{name}, {desc}",
+        RANDOM_MULT = "+{min} sampai +{max} {mult}, acak",
+        SEL_POS    = "pilihan {index}",
     },
     EDITION = {
         foil = "foil", holographic = "hologram",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "Tekan tombol keyboard atau kontroler untuk {action}",
         BOUND           = "{action} diatur ke {key}",
         CANCELLED       = "Pengaturan ulang dibatalkan",
+        CONFLICT        = "{key} sudah diatur ke {action}, pengaturan ulang dibatalkan",
+        CLICK_ORDER     = "Nilai kartu sesuai urutan pemilihan",
+        CURSOR_FOLLOW   = "Kursor game mengikuti navigasi",
         ANN_TYPE        = "Bacakan jenis",
         ANN_SUBTYPE     = "Bacakan kelangkaan",
         ANN_SELECTED    = "Bacakan status pilihan",

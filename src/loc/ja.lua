@@ -106,6 +106,8 @@ return {
         SELECTED   = "選択",
         DESELECTED = "選択解除",
         TIP        = "{name}、{desc}",
+        RANDOM_MULT = "+{min}～+{max}{mult}、ランダム",
+        SEL_POS    = "選択{index}",
     },
     EDITION = {
         foil = "フォイル", holographic = "ホログラフィック",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "{action}に割り当てるキーまたはボタンを押してください",
         BOUND           = "{action}を{key}に割り当てました",
         CANCELLED       = "割り当てをキャンセルしました",
+        CONFLICT        = "{key}は既に{action}に割り当てられています。割り当てをキャンセルしました",
+        CLICK_ORDER     = "選択した順番でカードをスコア計算",
+        CURSOR_FOLLOW   = "ゲームカーソルがナビゲーションに追従",
         ANN_TYPE        = "種類を読み上げる",
         ANN_SUBTYPE     = "レアリティを読み上げる",
         ANN_SELECTED    = "選択状態を読み上げる",

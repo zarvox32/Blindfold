@@ -12,11 +12,22 @@ What it does:
    branch zipball, remapping `src/**` and target injector files to
    the same destinations) and extracts it, routed:
    * **Windows**:
-     * `version.dll` → the game folder (Lovely Injector; only written when missing)
+     * `version.dll` → the game folder (Lovely Injector; written when missing,
+       silently skipped when identical — so updates stay elevation-free. When
+       it DIFFERS, the user is asked: an outdated Lovely crashes at launch on
+       Blindfold's `lovely.toml`, but a newer one may be serving other mods,
+       so neither direction is replaced silently)
      * `Blindfold/**` (excluding `lib/libprism.dylib`) → `%APPDATA%\Balatro\Mods`
+       (replaced wholesale, so updates never leave stale files; settings live
+       outside and survive)
    * **macOS**:
-     * `liblovely.dylib` and `run_lovely_macos.sh` → the game folder (Lovely Injector; only written when missing)
+     * `liblovely.dylib`, `run_lovely_macos.sh` and `steam_lovely_macos.sh` →
+       the game folder, with the same missing / identical / differing handling
+       as `version.dll` above. The `.sh` files are made executable, since zip
+       entries carry no unix mode and Steam cannot exec a launch wrapper
+       without it.
      * `Blindfold/**` (excluding `lib/prism.dll`) → `~/Library/Application Support/Balatro/Mods`
+       (replaced wholesale, as above)
 3. Tracks the installed version in `Mods\Blindfold\version` and offers
    Update when GitHub has a newer tag (semver compare). Dev builds are
    recorded as `main@<sha>` and update-check against the tip of main

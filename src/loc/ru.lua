@@ -106,6 +106,8 @@ return {
         SELECTED   = "выбрана",
         DESELECTED = "снята",
         TIP        = "{name}, {desc}",
+        RANDOM_MULT = "от +{min} до +{max} {mult}, случайно",
+        SEL_POS    = "выбор {index}",
     },
     EDITION = {
         foil = "фольга", holographic = "голографическая",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "Нажмите клавишу или кнопку контроллера для {action}",
         BOUND           = "{action} назначено на {key}",
         CANCELLED       = "Переназначение отменено",
+        CONFLICT        = "{key} уже назначено на {action}, переназначение отменено",
+        CLICK_ORDER     = "Подсчёт карт в порядке выбора",
+        CURSOR_FOLLOW   = "Курсор игры следует за навигацией",
         ANN_TYPE        = "Озвучивать тип",
         ANN_SUBTYPE     = "Озвучивать редкость",
         ANN_SELECTED    = "Озвучивать выбор",

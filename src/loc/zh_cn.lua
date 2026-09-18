@@ -106,6 +106,8 @@ return {
         SELECTED   = "已选中",
         DESELECTED = "已取消选中",
         TIP        = "{name}，{desc}",
+        RANDOM_MULT = "+{min}至+{max}{mult}，随机",
+        SEL_POS    = "选择{index}",
     },
     EDITION = {
         foil = "闪箔", holographic = "镭射",
@@ -287,6 +289,9 @@ return {
         PRESS_KEY       = "请按下要分配给{action}的按键或手柄按钮",
         BOUND           = "{action}已绑定到{key}",
         CANCELLED       = "已取消重新绑定",
+        CONFLICT        = "{key}已绑定到{action}，已取消重新绑定",
+        CLICK_ORDER     = "按选择顺序计分卡牌",
+        CURSOR_FOLLOW   = "游戏光标跟随导航",
         ANN_TYPE        = "朗读类型",
         ANN_SUBTYPE     = "朗读稀有度",
         ANN_SELECTED    = "朗读选中状态",
