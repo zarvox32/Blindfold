@@ -90,6 +90,32 @@ Prefer to place files yourself? Each release also ships `Blindfold.zip`
    first — see **Launching on macOS** above; without them the game starts
    unmodded.
 
+#### macOS: unblocking the bundled libraries
+
+If you download these files with a browser, macOS quarantines them and refuses
+to load them. Both failures are quiet, so they are easy to misdiagnose:
+
+* A quarantined `liblovely.dylib` means the mod never loads at all.
+* A quarantined `lib/libprism.dylib` means the mod loads and writes to
+  `blindfold.log` but never speaks. The log records the reason:
+  `Prism NOT loaded ... library load disallowed by system policy`.
+
+Clear it either way:
+
+* **System Settings** — open Privacy & Security and go to the Security
+  section. After a blocked load attempt there is a message naming the blocked
+  library with an **Allow Anyway** button. Expect to do this once per library,
+  relaunching the game in between.
+* **Terminal** — remove the flag directly:
+
+  ```
+  xattr -d com.apple.quarantine "<game folder>/liblovely.dylib"
+  xattr -d com.apple.quarantine "$HOME/Library/Application Support/Balatro/Mods/Blindfold/lib/libprism.dylib"
+  ```
+
+Installing through the installer avoids this entirely — files it extracts
+itself are not quarantined.
+
 To update manually, delete the `Blindfold` folder under `Mods` and copy in the new zip's folder — settings live outside it and survive. To uninstall manually, delete the `Blindfold` folder under `Mods` and the injector files.
 
 **Uninstalling:** the installer's Uninstall button removes the mod and
